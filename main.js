@@ -1,47 +1,50 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBVgNV4u6JgOFWcNsT5Zx9Cna_il49Ykdk",
+    authDomain: "cloudonly-80ade.firebaseapp.com",
+    databaseURL: "https://cloudonly-80ade-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "cloudonly-80ade",
+    storageBucket: "cloudonly-80ade.appspot.com",
+    messagingSenderId: "713827963294",
+    appId: "1:713827963294:web:ba2419f1d0e9200224068f"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig); //firebase.initializeApp
+
 //import firebase from "firebase/compat/app";
         // Required for side-effects
-        
         //import "firebase/firestore";
-        import firebase from "firebase/app";
+        //import firebase from "firebase/app";
         //import { initializeApp } from "firebase/app";
         
-        // TODO: Replace the following with your app's Firebase project configuration
-        // See: https://support.google.com/firebase/answer/7015592
-        const firebaseConfig = {
-            apiKey: "",
-            authDomain: "",
-            databaseURL: "",
-            projectId: "",
-            storageBucket: "",
-            messagingSenderId: "",
-            appId: ""
-        };
+const auth = getAuth(app);
+onAuthStateChanged(auth, user => {
+    console.log("Logged in as ", user);
+});
 
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
+signInWithPopup(auth, new GoogleAuthProvider())
 
-        const auth = getAuth(app);
-        onAuthStateChanged(auth, user => {
-            console.log("Logged in as ", user);
-        });
+// Reference to documnet in firestore
+const db = getFirestore(app);
+const boatRef = doc(db, "boats/myboat");
 
-        signInWithPopup(auth, new GoogleAuthProvider())
+setDoc(boatRef, {
+    owner: auth.currentUser.uid,
+    name: "Starfire",
+    length: 32,
+    color: "red",
+});
 
-        // Reference to documnet in firestore
-        const db = getFirestore(app);
-        const boatRef = doc(db, "boats/myboat");
-
-        setDoc(boatRef, {
-            owner: auth.currentUser.uid,
-            name: "Starfire",
-            length: 32,
-            color: "red",
-        });
-
-        // realtime listener
-        onSnapshot(boatRef, snapshot =>{
-            const boat = snapshot.data();
-        })
+// realtime listener
+onSnapshot(boatRef, snapshot =>{
+    const boat = snapshot.data();
+})
 
 
         // Rules
