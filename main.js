@@ -116,21 +116,27 @@ const deleteData = () => {
     })
 }
 
+
+
+
+
+
 /*
 */
 
 // move into button...
 
-const auth2 = firebase.auth;
+const auth2 = firebase.auth; //firebase/auth
+const auth3 = firebase.auth(); //firebase/auth
 //getAuth(firebaseApp);
-auth2.onAuthStateChanged(auth2, user => {
+onAuthStateChanged(auth3, user => {
     console.log("Logged in as ", user);
 });
 
 //var provider = new firebase.auth.GoogleAuthProvider();
 
 
-auth2.signInWithPopup(auth2, new auth2.GoogleAuthProvider())
+signInWithPopup(auth2, new auth2.GoogleAuthProvider())
 
 // Reference to documnet in firestore
 const db2 = firebaseApp.firestore();
