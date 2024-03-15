@@ -119,7 +119,9 @@ const deleteData = () => {
 /*
 */
 
-const auth2 = firebaseApp.auth();
+// move into button...
+
+const auth2 = firebase.auth;
 //getAuth(firebaseApp);
 auth2.onAuthStateChanged(auth2, user => {
     console.log("Logged in as ", user);
