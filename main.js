@@ -87,9 +87,9 @@ const readData = () => {
 const updateData = () => {
     const result = document.getElementById('result')
     
-    db.collection('users').doc('j52W06qCaHWOmu4tiKYxJmphUUQ2')
+    db.collection('users').doc('YC7WFOPSqWNCVDx99wML')
     .update({
-        email: 'ashishisagoodboy1234@gmail.com',
+        email: '123456@gmail.com',
         password: '123456'
     })
     .then(() => {
@@ -105,7 +105,7 @@ const updateData = () => {
 const deleteData = () => {
     const result = document.getElementById('result')
 
-    db.collection('users').doc('j52W06qCaHWOmu4tiKYxJmphUUQ2').delete()
+    db.collection('users').doc('YC7WFOPSqWNCVDx99wML').delete()
     .then(() => {
         alert('Data Deleted')
         result.innerHTML = "successful delete"
@@ -119,7 +119,8 @@ const deleteData = () => {
 /*
 */
 
-const auth2 = getAuth(firebaseApp);
+const auth2 = firebaseApp.auth();
+//getAuth(firebaseApp);
 onAuthStateChanged(auth2, user => {
     console.log("Logged in as ", user);
 });
