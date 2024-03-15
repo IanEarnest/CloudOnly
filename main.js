@@ -111,8 +111,8 @@ const deleteData = () => {
 /*
 Google auth
 */
-result.innerHTML = "Logging in with Google Auth"
-console.log("Logging in with Google Auth");
+result.innerHTML = "Logging in with Google Auth..."
+console.log("Logging in with Google Auth...");
 
 // move into button...
 const auth2 = firebase.auth; //firebase/auth
@@ -121,7 +121,8 @@ const auth3 = firebase.auth();
 
 firebase.auth().onAuthStateChanged(auth3, user => {
     console.log("Logged in as ", user);
-    result.innerHTML = "Logged in as ", user
+    //result.innerHTML = "Logged in as ", user
+    result.innerHTML = "Logged in as ..."
 });
 
 var provider = new firebase.auth.GoogleAuthProvider();
@@ -138,8 +139,9 @@ firebase.auth()
     // The signed-in user info.
     var user = result.user;
     // IdP data available in result.additionalUserInfo.profile.
-    console.log("google auth success")
-    result.innerHTML = "google auth success"
+    console.log("google auth success");
+    result.innerHTML = "google auth success";
+
   }).catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
@@ -149,17 +151,23 @@ firebase.auth()
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
     
-    console.log(err)
-    result.innerHTML = "google auth fail"
+    console.log(err);
+    result.innerHTML = "google auth fail";
   });
 
 
 
+
+
+
+
+  
 // Reference to documnet in firestore
 const db2 = firebaseApp.firestore();
 //getFirestore(firebaseApp);
 
-const boatRef = doc(db2, "boats/myboat");
+const boatRef = firebase.auth().doc(db2, "boats/myboat");
+//doc(db2, "boats/myboat");
 
 
 firebase.auth().setDoc(boatRef, {
