@@ -128,7 +128,7 @@ auth2.onAuthStateChanged(auth2, user => {
 //var provider = new firebase.auth.GoogleAuthProvider();
 
 
-auth2.signInWithPopup(auth2, new GoogleAuthProvider())
+auth2.signInWithPopup(auth2, new  firebaseApp.auth.GoogleAuthProvider())
 
 // Reference to documnet in firestore
 const db2 = firebaseApp.firestore();
