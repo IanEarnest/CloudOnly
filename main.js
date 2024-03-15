@@ -1,3 +1,7 @@
+const result = document.getElementById('result')
+var email;
+var password;
+
 const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyBVgNV4u6JgOFWcNsT5Zx9Cna_il49Ykdk",
     authDomain: "cloudonly-80ade.firebaseapp.com",
@@ -11,12 +15,15 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 
-const result = document.getElementById('result')
-const email = document.getElementById('email').value
-const password = document.getElementById('password').value
 
+function getValues(){
+    email = document.getElementById('email').value
+    password = document.getElementById('password').value    
+}
 
 const register = () => {
+    getValues();
+
     auth.createUserWithEmailAndPassword(email, password)
     .then((res) => {
         console.log(res.user)
@@ -31,6 +38,8 @@ const register = () => {
 }
 
 const login = () => {
+    getValues();
+
     auth.signInWithEmailAndPassword(email, password)
     .then((res) => {
         console.log(res.user)
@@ -45,6 +54,8 @@ const login = () => {
 }
 
 const saveData = () => {
+    getValues();
+
     db.collection('users')//.doc('YC7WFOPSqWNCVDx99wML')
     .add({
         email: email,
@@ -61,6 +72,8 @@ const saveData = () => {
 }
 
 const readData = () => {
+    getValues();
+
     db.collection('users')
     .get()
     .then((data) => {
@@ -75,7 +88,9 @@ const readData = () => {
     })
 }
 
-const updateData = () => {    
+const updateData = () => {
+    getValues();
+
     db.collection('users').doc('YC7WFOPSqWNCVDx99wML')
     .update({
         email: '123456@gmail.com',
@@ -92,6 +107,8 @@ const updateData = () => {
 }
 
 const deleteData = () => {
+    getValues();
+
     db.collection('users').doc('YC7WFOPSqWNCVDx99wML').delete()
     .then(() => {
         alert('Data Deleted')
