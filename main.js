@@ -70,7 +70,7 @@ const saveData = () => {
 const readData = () => {
     const result = document.getElementById('result')
 
-    db.collection('users').doc('YC7WFOPSqWNCVDx99wML')
+    db.collection('users')
     .get()
     .then((data) => {
         console.log(data.docs.map((item) => {
