@@ -129,14 +129,14 @@ const deleteData = () => {
 const auth2 = firebase.auth; //firebase/auth
 const auth3 = firebase.auth(); //firebase/auth
 //getAuth(firebaseApp);
-onAuthStateChanged(auth3, user => {
+auth2.onAuthStateChanged(auth3, user => {
     console.log("Logged in as ", user);
 });
 
 //var provider = new firebase.auth.GoogleAuthProvider();
 
 
-signInWithPopup(auth2, new auth2.GoogleAuthProvider())
+auth2.signInWithPopup(auth2, new auth2.GoogleAuthProvider())
 
 // Reference to documnet in firestore
 const db2 = firebaseApp.firestore();
