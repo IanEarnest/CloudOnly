@@ -11,11 +11,12 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 
-const register = () => {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    const result = document.getElementById('result')
+const result = document.getElementById('result')
+const email = document.getElementById('email').value
+const password = document.getElementById('password').value
 
+
+const register = () => {
     auth.createUserWithEmailAndPassword(email, password)
     .then((res) => {
         console.log(res.user)
@@ -30,10 +31,6 @@ const register = () => {
 }
 
 const login = () => {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    const result = document.getElementById('result')
-
     auth.signInWithEmailAndPassword(email, password)
     .then((res) => {
         console.log(res.user)
@@ -48,10 +45,6 @@ const login = () => {
 }
 
 const saveData = () => {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    const result = document.getElementById('result')
-
     db.collection('users')//.doc('YC7WFOPSqWNCVDx99wML')
     .add({
         email: email,
@@ -68,8 +61,6 @@ const saveData = () => {
 }
 
 const readData = () => {
-    const result = document.getElementById('result')
-
     db.collection('users')
     .get()
     .then((data) => {
@@ -84,9 +75,7 @@ const readData = () => {
     })
 }
 
-const updateData = () => {
-    const result = document.getElementById('result')
-    
+const updateData = () => {    
     db.collection('users').doc('YC7WFOPSqWNCVDx99wML')
     .update({
         email: '123456@gmail.com',
@@ -103,8 +92,6 @@ const updateData = () => {
 }
 
 const deleteData = () => {
-    const result = document.getElementById('result')
-
     db.collection('users').doc('YC7WFOPSqWNCVDx99wML').delete()
     .then(() => {
         alert('Data Deleted')
@@ -122,16 +109,19 @@ const deleteData = () => {
 
 
 /*
+Google auth
 */
+result.innerHTML = "Logging in with Google Auth"
+console.log("Logging in with Google Auth");
 
 // move into button...
-
 const auth2 = firebase.auth; //firebase/auth
 const auth3 = firebase.auth();
 //getAuth(firebaseApp);
 
 firebase.auth().onAuthStateChanged(auth3, user => {
     console.log("Logged in as ", user);
+    result.innerHTML = "Logged in as ", user
 });
 
 var provider = new firebase.auth.GoogleAuthProvider();
@@ -148,8 +138,8 @@ firebase.auth()
     // The signed-in user info.
     var user = result.user;
     // IdP data available in result.additionalUserInfo.profile.
-      // ...
-    console.log("success")
+    console.log("google auth success")
+    result.innerHTML = "google auth success"
   }).catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
@@ -160,6 +150,7 @@ firebase.auth()
     var credential = error.credential;
     
     console.log(err)
+    result.innerHTML = "google auth fail"
   });
 
 
