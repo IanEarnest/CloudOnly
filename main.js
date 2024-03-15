@@ -52,7 +52,7 @@ const saveData = () => {
     const password = document.getElementById('password').value
     const result = document.getElementById('result')
 
-    db.collection('users')
+    db.collection('users').doc('YC7WFOPSqWNCVDx99wML')
     .add({
         email: email,
         password: password
@@ -70,7 +70,7 @@ const saveData = () => {
 const readData = () => {
     const result = document.getElementById('result')
 
-    db.collection('users')
+    db.collection('users').doc('YC7WFOPSqWNCVDx99wML')
     .get()
     .then((data) => {
         console.log(data.docs.map((item) => {
@@ -121,17 +121,17 @@ const deleteData = () => {
 
 const auth2 = firebaseApp.auth();
 //getAuth(firebaseApp);
-onAuthStateChanged(auth2, user => {
+firebaseApp.onAuthStateChanged(auth2, user => {
     console.log("Logged in as ", user);
 });
 
-signInWithPopup(auth2, new GoogleAuthProvider())
+firebaseApp.signInWithPopup(auth2, new GoogleAuthProvider())
 
 // Reference to documnet in firestore
 const db2 = getFirestore(firebaseApp);
 const boatRef = doc(db2, "boats/myboat");
 
-setDoc(boatRef, {
+firebaseApp.setDoc(boatRef, {
     owner: auth2.currentUser.uid,
     name: "Starfire",
     length: 32,
@@ -139,7 +139,7 @@ setDoc(boatRef, {
 });
 
 // realtime listener
-onSnapshot(boatRef, snapshot =>{
+firebaseApp.onSnapshot(boatRef, snapshot =>{
     const boat = snapshot.data();
 })
 
